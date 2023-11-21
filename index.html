@@ -12,62 +12,60 @@
 </head>
 
 <body>
-    <!-- Deixem l'etiqueta audio sense controls. Veieu que desapareix tot. -->
     <audio id="player">
         <source src="media/techbg.mp3" type="audio/mp3">
         Ho sento, el teu navegador no suporta àudio d'HTML5.
     </audio>
-    <!-- Afegim una capa que mostra si l'àudio s'està reproduint: ho fem amb una animació CSS. -->
     <div class="fonsPlayer">
         <div class="ocean">
             <div class="wave"></div>
             <div class="wave"></div>
         </div>
     </div>
-    <!-- Afegim un botó de control per engegar la música. Utilitzem una font d'icones. -->
     <div class="controlButtons">
-        <!-- Engeguem l'àudio en fer click. -->
-        <button type="button" onclick="engegarAudio();">
-            <span class="material-symbols-outlined">
+        <button type="button" onclick="toggleAudio()">
+            <span class="material-symbols-outlined" id="playButton">
                 play_arrow
             </span>
         </button>
     </div>
 
-    <svg width="50" height="50">
+    <!-- SVG per al control de reproducció -->
+    <svg width="50" height="50" onclick="toggleAudio()">
         <rect x="12.5" y="12.5" width="25" height="25" style="fill:gray;stroke-width:1;stroke:rgb(0,0,0)" />
         <polygon points="25,20 30,30 20,30"
             style="fill:lime;stroke:purple;stroke-width:1; transform: rotate(90deg); transform-origin: 50% 50%;" />
     </svg>
 
-    <!-- Recordeu que heu de seguir les lleis en matèria de propietat intelectual.
-         En aquest cas, cal nomenar i enllaçar l'autor i el tipus de llicència. 
-    -->
-    <div style="padding: 1em; margin-bottom: 1em; border: 1px; background-color: #eee;">
-        "<a rel="nofollow" href="https://timtaj.com/royalty-free-music/background-technology">Background Technology</a>"
-        by <a rel="nofollow" href="https://freemusicarchive.org/music/timtaj/contact">Taj Tim</a>
-        is licensed under <a rel="nofollow"
-            href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0
-            International License</a>
-    </div>
-    <div style="padding: 1em; margin-bottom: 1em; border: 1px; background-color: #eee;">
-        "Animació CSS de <a rel="nofollow" href="https://codepen.io/tedmcdo">Ted MacDonald</a>:
-        a CodePen <a rel="nofollow" href="https://codepen.io/tedmcdo/pen/PqxKXg">CSS & SVG Waves Animation</a>
-    </div>
-    <!-- Cal seleccionar l'element d'àudio. -->
+    <!-- Control de volum SVG -->
+    <svg width="200" height="50" style="cursor: pointer;" onclick="changeVolume(event)">
+        <rect x="10" y="10" width="180" height="10" style="fill: #ccc;" />
+        <path id="volumePath" d="M20 15 L200 15" style="stroke: black; stroke-width: 8px;" />
+    </svg>
+
     <script>
         let audio = document.getElementById('player');
+        let playButton = document.getElementById('playButton');
 
-        function engegarAudio() {
-            // engeguem audio
-            audio.play();
-            // engeguem animació
-            var waves = document.querySelectorAll('.wave');
-            for (var i = 0; i < waves.length; i++) {
-                waves[i].classList.add('playing');
+        function toggleAudio() {
+            if (audio.paused || audio.ended) {
+                audio.play();
+                playButton.textContent = 'pause';
+            } else {
+                audio.pause();
+                playButton.textContent = 'play_arrow';
             }
         }
 
+        function changeVolume(event) {
+            const volumePath = document.getElementById('volumePath');
+            const rect = event.target.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const volume = mouseX / 180; // Calculem el volum basat en la posició de l'scroll
+            volumePath.setAttribute('d', `M20 15 L${20 + volume * 180} 15`); // Actualitzem el path de l'scroll
+
+            audio.volume = volume; // Actualitzem el volum de l'àudio
+        }
     </script>
 </body>
 

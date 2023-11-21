@@ -1,21 +1,38 @@
-# Pràctica 8. Àudio i vídeo
+# Demo d'Àudio i Vídeo
 
-En aquesta pràctica cal manipular àudio i vídeo dins una pàgina web.
+Aquest és un exemple senzill d'una pàgina web que demostra la reproducció d'àudio i l'ús de controls visuals mitjançant SVG.
 
-## Instrucciones
+## Descripció
 
-1. Feu un fork del repositori d’exemple: https://github.com/profecf/audio-video.git.
-2. Conté 3 branques: main, audio i video.
+Aquesta pàgina web conté:
 
-### A la branca audio cal fer:
+- Un reproductor d'àudio amb un botó de reproducció/pausa.
+- Un control de volum basat en un element SVG.
+- Elements visuals que simulen ones en el fons quan s'està reproduint àudio.
 
-- Amb SVG, creeu l’estructura del reproductor, tan sofisticat com vulgueu. Cada botó ha de ser un element SVG. Un exemple senzill podria ser aquest, amb l’animació al mig.
-- Afegiu un botó per parar/reiniciar el so.
-- Afegiu un slider per controlar el volum.
+## Com utilitzar
 
-### Entrega
+1. **Reproduir/Pausar l'àudio:** Clic al botó de reproducció/pausa per a iniciar l'audio i l'animació, i clic a la icona d'SVG per pausar/renaudar.
+2. **Control de Volum:** Clic sobre la barra de volum per ajustar el nivell de volum.
 
-L’entrega serà a través del vostre fork del repositori. Feu la tramesa amb:
+## Estructura del Codi
 
-- L’enllaç al repositori.
-- Podeu actualitzar el fitxer README posant la informació que creieu necessària.
+- **Audio:** Un element d'àudio amb un fitxer MP3 com a font, sense controls
+- **Botó de Reproducció:** Un botó que reprodueix el so i l'animació "waves"
+- **SVG per al Control de Reproducció:** Un element SVG que representa el botó de reproducció/pausa.
+- **Control de Volum SVG:** Un element SVG que representa un control de volum horitzontal.
+
+## Funcionament
+
+- El botó de reproducció/pausa inicia l'audio i l'animació
+- El botó SVG pausa/renauda l'audio i l'animació
+- El control de volum permet ajustar el volum de l'àudio fent clic i arrossegant sobre la barra.
+
+## Recursos
+
+- Font de l'àudio: `techbg.mp3`
+- Icones de Material Design utilitzats per al botó de reproducció/pausa.
+
+## Codi
+
+El codi es pot trobar al fitxer HTML proporcionat.
