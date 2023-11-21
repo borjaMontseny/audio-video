@@ -5,16 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Àudio i Vídeo</title>
+    <style>
+        /* Estils dels subtítols */
+        ::cue {
+            color: skyblue; /* Color dels subtítols */
+        }
+    </style>
 </head>
 <body>
-    <audio controls autoplay loop>
-        <source src="media/techbg.mp3" type="audio/mp3">
-        Ho sento, el teu navegador no suporta àudio d'HTML5.
-    </audio>
-    <div style="padding: 1em; margin-bottom: 1em; border: 1px; background-color: #eee;">
-        "<a rel="nofollow" class="external text" href="https://timtaj.com/royalty-free-music/background-technology">Background Technology</a>" 
-        by <a rel="nofollow" class="external text" href="https://freemusicarchive.org/music/timtaj/contact">Taj Tim</a> 
-        is licensed under <a rel="nofollow" class="external text" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Attribution-NonCommercial-NoDerivatives 4.0 International License</a>
-    </div>
+    <hr>
+    <video id="myVideo" controls>
+        <source src="media/metro.mp4" type="video/mp4">
+        <source src="media/metro.ogg" type="video/ogg">
+        <track src="media/captions/metro-cat.vtt" label="Català" kind="captions" srclang="es-cat" default>
+        <track src="media/captions/metro-es.vtt" label="Espanyol" kind="captions" srclang="es">
+        El teu navegador no suporta l'element HTML vídeo.
+    </video>
+    <!-- Afegim el botó i el canvas -->
+    <button onclick="captureFrame()">Caputra B/N</button>
+    <canvas id="myCanvas" style="border:1px solid black;"></canvas>
+
+    <script>
+        const video = document.getElementById('myVideo');
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function captureFrame() {
+            // Captura del fotograma actual del vídeo
+            ctx.filter = 'grayscale(100%)'; // Blanc i negre
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            ctx.filter = 'none';
+        }
+    </script>
 </body>
 </html>
